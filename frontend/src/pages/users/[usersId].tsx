@@ -52,6 +52,8 @@ const EditUsers = () => {
 
     custom_permissions: [],
 
+    unit: null,
+
     password: '',
   };
   const [initialValues, setInitialValues] = useState(initVals);
@@ -167,6 +169,17 @@ const EditUsers = () => {
                   options={initialValues.custom_permissions}
                   itemRef={'permissions'}
                   showField={'name'}
+                ></Field>
+              </FormField>
+
+              <FormField label='Unit' labelFor='unit'>
+                <Field
+                  name='unit'
+                  id='unit'
+                  component={SelectField}
+                  options={initialValues.unit}
+                  itemRef={'units'}
+                  showField={'unit_number'}
                 ></Field>
               </FormField>
 

@@ -120,6 +120,14 @@ module.exports = function (sequelize, DataTypes) {
       constraints: false,
     });
 
+    db.users.belongsTo(db.units, {
+      as: 'unit',
+      foreignKey: {
+        name: 'unitId',
+      },
+      constraints: false,
+    });
+
     db.users.hasMany(db.file, {
       as: 'avatar',
       foreignKey: 'belongsToId',

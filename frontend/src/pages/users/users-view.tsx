@@ -138,6 +138,12 @@ const UsersView = () => {
             </CardBox>
           </>
 
+          <div className={'mb-4'}>
+            <p className={'block font-bold mb-2'}>Unit</p>
+
+            <p>{users?.unit?.unit_number ?? 'No data'}</p>
+          </div>
+
           <>
             <p className={'block font-bold mb-2'}>Units Owner</p>
             <CardBox
@@ -155,6 +161,8 @@ const UsersView = () => {
                       <th>Unit Factor</th>
 
                       <th>Cond Fee</th>
+
+                      <th>Parking Stall</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -174,6 +182,10 @@ const UsersView = () => {
                           <td data-label='unit_factor'>{item.unit_factor}</td>
 
                           <td data-label='cond_fee'>{item.cond_fee}</td>
+
+                          <td data-label='parking_stall'>
+                            {item.parking_stall}
+                          </td>
                         </tr>
                       ))}
                   </tbody>

@@ -56,6 +56,10 @@ module.exports = class UsersDBApi {
       });
     }
 
+    await users.setUnit(data.data.unit || null, {
+      transaction,
+    });
+
     await users.setCustom_permissions(data.data.custom_permissions || [], {
       transaction,
     });
@@ -190,6 +194,14 @@ module.exports = class UsersDBApi {
       );
     }
 
+    if (data.unit !== undefined) {
+      await users.setUnit(
+        data.unit,
+
+        { transaction },
+      );
+    }
+
     if (data.custom_permissions !== undefined) {
       await users.setCustom_permissions(data.custom_permissions, {
         transaction,
@@ -289,6 +301,10 @@ module.exports = class UsersDBApi {
       transaction,
     });
 
+    output.unit = await users.getUnit({
+      transaction,
+    });
+
     return output;
   }
 
@@ -322,6 +338,32 @@ module.exports = class UsersDBApi {
                 {
                   name: {
                     [Op.or]: filter.app_role
+                      .split('|')
+                      .map((term) => ({ [Op.iLike]: `%${term}%` })),
+                  },
+                },
+              ],
+            }
+          : {},
+      },
+
+      {
+        model: db.units,
+        as: 'unit',
+
+        where: filter.unit
+          ? {
+              [Op.or]: [
+                {
+                  id: {
+                    [Op.in]: filter.unit
+                      .split('|')
+                      .map((term) => Utils.uuid(term)),
+                  },
+                },
+                {
+                  unit_number: {
+                    [Op.or]: filter.unit
                       .split('|')
                       .map((term) => ({ [Op.iLike]: `%${term}%` })),
                   },

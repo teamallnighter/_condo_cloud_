@@ -31,6 +31,7 @@ const UnitsTablesPage = () => {
   const [filters] = useState([
     { label: 'UnitNumber', title: 'unit_number' },
     { label: 'Unit Factor', title: 'unit_factor', number: 'true' },
+    { label: 'Parking Stall', title: 'parking_stall', number: 'true' },
     { label: 'Balance', title: 'balance', number: 'true' },
     { label: 'Cond Fee', title: 'cond_fee', number: 'true' },
 

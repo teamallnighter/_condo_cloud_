@@ -80,6 +80,64 @@ const UnitsView = () => {
             <p>{units?.cond_fee || 'No data'}</p>
           </div>
 
+          <div className={'mb-4'}>
+            <p className={'block font-bold mb-2'}>Parking Stall</p>
+            <p>{units?.parking_stall || 'No data'}</p>
+          </div>
+
+          <>
+            <p className={'block font-bold mb-2'}>Users Unit</p>
+            <CardBox
+              className='mb-6 border border-gray-300 rounded overflow-hidden'
+              hasTable
+            >
+              <div className='overflow-x-auto'>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>First Name</th>
+
+                      <th>Last Name</th>
+
+                      <th>Phone Number</th>
+
+                      <th>E-Mail</th>
+
+                      <th>Disabled</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {units.users_unit &&
+                      Array.isArray(units.users_unit) &&
+                      units.users_unit.map((item: any) => (
+                        <tr
+                          key={item.id}
+                          onClick={() =>
+                            router.push(`/users/users-view/?id=${item.id}`)
+                          }
+                        >
+                          <td data-label='firstName'>{item.firstName}</td>
+
+                          <td data-label='lastName'>{item.lastName}</td>
+
+                          <td data-label='phoneNumber'>{item.phoneNumber}</td>
+
+                          <td data-label='email'>{item.email}</td>
+
+                          <td data-label='disabled'>
+                            {dataFormatter.booleanFormatter(item.disabled)}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+              {!units?.users_unit?.length && (
+                <div className={'text-center py-4'}>No data</div>
+              )}
+            </CardBox>
+          </>
+
           <>
             <p className={'block font-bold mb-2'}>Maintenance_requests Unit</p>
             <CardBox

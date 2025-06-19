@@ -77,6 +77,13 @@ const ListUnits = ({
                       <p className={'text-xs   text-gray-500 '}>Cond Fee</p>
                       <p className={'line-clamp-2'}>{item.cond_fee}</p>
                     </div>
+
+                    <div className={'flex-1 px-3'}>
+                      <p className={'text-xs   text-gray-500 '}>
+                        Parking Stall
+                      </p>
+                      <p className={'line-clamp-2'}>{item.parking_stall}</p>
+                    </div>
                   </Link>
                   <ListActionsPopover
                     onDelete={onDelete}

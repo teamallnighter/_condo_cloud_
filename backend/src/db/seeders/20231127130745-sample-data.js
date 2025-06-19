@@ -85,7 +85,7 @@ const MaintenanceRequestsData = [
 
     description: 'Leaking faucet in kitchen',
 
-    status: 'completed',
+    status: 'pending',
 
     request_date: new Date('2023-10-01T10:00:00Z'),
   },
@@ -105,7 +105,7 @@ const MaintenanceRequestsData = [
 
     description: 'Heating not working',
 
-    status: 'pending',
+    status: 'completed',
 
     request_date: new Date('2023-09-20T09:00:00Z'),
   },
@@ -115,7 +115,7 @@ const MaintenanceRequestsData = [
 
     description: 'Elevator malfunction',
 
-    status: 'in_progress',
+    status: 'completed',
 
     request_date: new Date('2023-10-02T11:15:00Z'),
   },
@@ -171,9 +171,11 @@ const UnitsData = [
 
     balance: 250,
 
-    unit_factor: 3,
+    unit_factor: 6,
 
-    cond_fee: 53.45,
+    cond_fee: 58.08,
+
+    parking_stall: 6,
   },
 
   {
@@ -185,7 +187,9 @@ const UnitsData = [
 
     unit_factor: 4,
 
-    cond_fee: 82.56,
+    cond_fee: 59.96,
+
+    parking_stall: 5,
   },
 
   {
@@ -195,9 +199,11 @@ const UnitsData = [
 
     balance: 150,
 
-    unit_factor: 3,
+    unit_factor: 4,
 
-    cond_fee: 49.53,
+    cond_fee: 96.18,
+
+    parking_stall: 7,
   },
 
   {
@@ -207,13 +213,61 @@ const UnitsData = [
 
     balance: 0,
 
-    unit_factor: 5,
+    unit_factor: 3,
 
-    cond_fee: 95.34,
+    cond_fee: 34.91,
+
+    parking_stall: 6,
   },
 ];
 
 // Similar logic for "relation_many"
+
+async function associateUserWithUnit() {
+  const relatedUnit0 = await Units.findOne({
+    offset: Math.floor(Math.random() * (await Units.count())),
+  });
+  const User0 = await Users.findOne({
+    order: [['id', 'ASC']],
+    offset: 0,
+  });
+  if (User0?.setUnit) {
+    await User0.setUnit(relatedUnit0);
+  }
+
+  const relatedUnit1 = await Units.findOne({
+    offset: Math.floor(Math.random() * (await Units.count())),
+  });
+  const User1 = await Users.findOne({
+    order: [['id', 'ASC']],
+    offset: 1,
+  });
+  if (User1?.setUnit) {
+    await User1.setUnit(relatedUnit1);
+  }
+
+  const relatedUnit2 = await Units.findOne({
+    offset: Math.floor(Math.random() * (await Units.count())),
+  });
+  const User2 = await Users.findOne({
+    order: [['id', 'ASC']],
+    offset: 2,
+  });
+  if (User2?.setUnit) {
+    await User2.setUnit(relatedUnit2);
+  }
+
+  const relatedUnit3 = await Units.findOne({
+    offset: Math.floor(Math.random() * (await Units.count())),
+  });
+  const User3 = await Users.findOne({
+    order: [['id', 'ASC']],
+    offset: 3,
+  });
+  if (User3?.setUnit) {
+    await User3.setUnit(relatedUnit3);
+  }
+}
 
 // Similar logic for "relation_many"
 
@@ -325,6 +379,8 @@ module.exports = {
 
     await Promise.all([
       // Similar logic for "relation_many"
+
+      await associateUserWithUnit(),
 
       // Similar logic for "relation_many"
 

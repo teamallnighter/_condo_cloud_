@@ -113,6 +113,13 @@ const ListUsers = ({
                           .join(', ')}
                       </p>
                     </div>
+
+                    <div className={'flex-1 px-3'}>
+                      <p className={'text-xs   text-gray-500 '}>Unit</p>
+                      <p className={'line-clamp-2'}>
+                        {dataFormatter.unitsOneListFormatter(item.unit)}
+                      </p>
+                    </div>
                   </Link>
                   <ListActionsPopover
                     onDelete={onDelete}

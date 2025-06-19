@@ -30,6 +30,10 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.DECIMAL,
       },
 
+      parking_stall: {
+        type: DataTypes.INTEGER,
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,
@@ -45,6 +49,14 @@ module.exports = function (sequelize, DataTypes) {
 
   units.associate = (db) => {
     /// loop through entities and it's fields, and if ref === current e[name] and create relation has many on parent entity
+
+    db.units.hasMany(db.users, {
+      as: 'users_unit',
+      foreignKey: {
+        name: 'unitId',
+      },
+      constraints: false,
+    });
 
     db.units.hasMany(db.maintenance_requests, {
       as: 'maintenance_requests_unit',

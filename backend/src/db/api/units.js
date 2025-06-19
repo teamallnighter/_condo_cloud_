@@ -19,6 +19,7 @@ module.exports = class UnitsDBApi {
         balance: data.balance || null,
         unit_factor: data.unit_factor || null,
         cond_fee: data.cond_fee || null,
+        parking_stall: data.parking_stall || null,
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -45,6 +46,7 @@ module.exports = class UnitsDBApi {
       balance: item.balance || null,
       unit_factor: item.unit_factor || null,
       cond_fee: item.cond_fee || null,
+      parking_stall: item.parking_stall || null,
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -76,6 +78,9 @@ module.exports = class UnitsDBApi {
       updatePayload.unit_factor = data.unit_factor;
 
     if (data.cond_fee !== undefined) updatePayload.cond_fee = data.cond_fee;
+
+    if (data.parking_stall !== undefined)
+      updatePayload.parking_stall = data.parking_stall;
 
     updatePayload.updatedById = currentUser.id;
 
@@ -149,6 +154,10 @@ module.exports = class UnitsDBApi {
     }
 
     const output = units.get({ plain: true });
+
+    output.users_unit = await units.getUsers_unit({
+      transaction,
+    });
 
     output.maintenance_requests_unit = await units.getMaintenance_requests_unit(
       {
@@ -284,6 +293,30 @@ module.exports = class UnitsDBApi {
             ...where,
             cond_fee: {
               ...where.cond_fee,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.parking_stallRange) {
+        const [start, end] = filter.parking_stallRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            parking_stall: {
+              ...where.parking_stall,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            parking_stall: {
+              ...where.parking_stall,
               [Op.lte]: end,
             },
           };

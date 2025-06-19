@@ -48,6 +48,8 @@ const initialValues = {
   app_role: '',
 
   custom_permissions: [],
+
+  unit: '',
 };
 
 const UsersNew = () => {
@@ -137,6 +139,16 @@ const UsersNew = () => {
                   itemRef={'permissions'}
                   options={[]}
                   component={SelectFieldMany}
+                ></Field>
+              </FormField>
+
+              <FormField label='Unit' labelFor='unit'>
+                <Field
+                  name='unit'
+                  id='unit'
+                  component={SelectField}
+                  options={[]}
+                  itemRef={'units'}
                 ></Field>
               </FormField>
 

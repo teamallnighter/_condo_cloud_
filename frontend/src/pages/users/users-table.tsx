@@ -36,6 +36,8 @@ const UsersTablesPage = () => {
 
     { label: 'App Role', title: 'app_role' },
 
+    { label: 'Unit', title: 'unit' },
+
     { label: 'Custom Permissions', title: 'custom_permissions' },
   ]);
 

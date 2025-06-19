@@ -27,6 +27,9 @@ router.use(checkCrudPermissions('units'));
  *          unit_factor:
  *            type: integer
  *            format: int64
+ *          parking_stall:
+ *            type: integer
+ *            format: int64
 
  *          balance:
  *            type: integer
@@ -314,6 +317,7 @@ router.get(
         'id',
         'unit_number',
         'unit_factor',
+        'parking_stall',
         'balance',
         'cond_fee',
       ];

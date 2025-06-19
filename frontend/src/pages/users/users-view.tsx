@@ -153,6 +153,8 @@ const UsersView = () => {
                       <th>Balance</th>
 
                       <th>Unit Factor</th>
+
+                      <th>Cond Fee</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -170,6 +172,8 @@ const UsersView = () => {
                           <td data-label='balance'>{item.balance}</td>
 
                           <td data-label='unit_factor'>{item.unit_factor}</td>
+
+                          <td data-label='cond_fee'>{item.cond_fee}</td>
                         </tr>
                       ))}
                   </tbody>

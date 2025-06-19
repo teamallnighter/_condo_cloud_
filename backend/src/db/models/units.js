@@ -26,6 +26,10 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.INTEGER,
       },
 
+      cond_fee: {
+        type: DataTypes.DECIMAL,
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,

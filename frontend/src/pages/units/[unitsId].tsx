@@ -43,6 +43,8 @@ const EditUnits = () => {
     balance: '',
 
     unit_factor: '',
+
+    cond_fee: '',
   };
   const [initialValues, setInitialValues] = useState(initVals);
 
@@ -120,6 +122,10 @@ const EditUnits = () => {
                   name='unit_factor'
                   placeholder='Unit Factor'
                 />
+              </FormField>
+
+              <FormField label='Cond Fee'>
+                <Field type='number' name='cond_fee' placeholder='Cond Fee' />
               </FormField>
 
               <BaseDivider />

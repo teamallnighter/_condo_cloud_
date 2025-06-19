@@ -18,6 +18,7 @@ module.exports = class UnitsDBApi {
         unit_number: data.unit_number || null,
         balance: data.balance || null,
         unit_factor: data.unit_factor || null,
+        cond_fee: data.cond_fee || null,
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -43,6 +44,7 @@ module.exports = class UnitsDBApi {
       unit_number: item.unit_number || null,
       balance: item.balance || null,
       unit_factor: item.unit_factor || null,
+      cond_fee: item.cond_fee || null,
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -72,6 +74,8 @@ module.exports = class UnitsDBApi {
 
     if (data.unit_factor !== undefined)
       updatePayload.unit_factor = data.unit_factor;
+
+    if (data.cond_fee !== undefined) updatePayload.cond_fee = data.cond_fee;
 
     updatePayload.updatedById = currentUser.id;
 
@@ -256,6 +260,30 @@ module.exports = class UnitsDBApi {
             ...where,
             unit_factor: {
               ...where.unit_factor,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.cond_feeRange) {
+        const [start, end] = filter.cond_feeRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            cond_fee: {
+              ...where.cond_fee,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            cond_fee: {
+              ...where.cond_fee,
               [Op.lte]: end,
             },
           };

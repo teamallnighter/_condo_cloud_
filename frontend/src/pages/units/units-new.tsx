@@ -40,6 +40,8 @@ const initialValues = {
   balance: '',
 
   unit_factor: '',
+
+  cond_fee: '',
 };
 
 const UnitsNew = () => {
@@ -93,6 +95,10 @@ const UnitsNew = () => {
                   name='unit_factor'
                   placeholder='Unit Factor'
                 />
+              </FormField>
+
+              <FormField label='Cond Fee'>
+                <Field type='number' name='cond_fee' placeholder='Cond Fee' />
               </FormField>
 
               <BaseDivider />

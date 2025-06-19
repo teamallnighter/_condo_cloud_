@@ -99,6 +99,20 @@ export const loadColumns = async (
     },
 
     {
+      field: 'cond_fee',
+      headerName: 'Cond Fee',
+      flex: 1,
+      minWidth: 120,
+      filterable: false,
+      headerClassName: 'datagrid--header',
+      cellClassName: 'datagrid--cell',
+
+      editable: hasUpdatePermission,
+
+      type: 'number',
+    },
+
+    {
       field: 'actions',
       type: 'actions',
       minWidth: 30,

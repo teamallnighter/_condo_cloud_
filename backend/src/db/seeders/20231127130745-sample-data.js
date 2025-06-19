@@ -95,7 +95,7 @@ const MaintenanceRequestsData = [
 
     description: 'Broken window in living room',
 
-    status: 'in_progress',
+    status: 'pending',
 
     request_date: new Date('2023-09-25T14:30:00Z'),
   },
@@ -172,6 +172,8 @@ const UnitsData = [
     balance: 250,
 
     unit_factor: 3,
+
+    cond_fee: 53.45,
   },
 
   {
@@ -181,7 +183,9 @@ const UnitsData = [
 
     balance: 0,
 
-    unit_factor: 7,
+    unit_factor: 4,
+
+    cond_fee: 82.56,
   },
 
   {
@@ -191,7 +195,9 @@ const UnitsData = [
 
     balance: 150,
 
-    unit_factor: 8,
+    unit_factor: 3,
+
+    cond_fee: 49.53,
   },
 
   {
@@ -201,7 +207,9 @@ const UnitsData = [
 
     balance: 0,
 
-    unit_factor: 6,
+    unit_factor: 5,
+
+    cond_fee: 95.34,
   },
 ];
 

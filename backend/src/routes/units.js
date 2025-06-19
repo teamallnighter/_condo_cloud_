@@ -31,6 +31,9 @@ router.use(checkCrudPermissions('units'));
  *          balance:
  *            type: integer
  *            format: int64
+ *          cond_fee:
+ *            type: integer
+ *            format: int64
 
  */
 
@@ -307,7 +310,13 @@ router.get(
     const currentUser = req.currentUser;
     const payload = await UnitsDBApi.findAll(req.query, { currentUser });
     if (filetype && filetype === 'csv') {
-      const fields = ['id', 'unit_number', 'unit_factor', 'balance'];
+      const fields = [
+        'id',
+        'unit_number',
+        'unit_factor',
+        'balance',
+        'cond_fee',
+      ];
       const opts = { fields };
       try {
         const csv = parse(payload.rows, opts);

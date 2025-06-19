@@ -75,6 +75,11 @@ const UnitsView = () => {
             <p>{units?.unit_factor || 'No data'}</p>
           </div>
 
+          <div className={'mb-4'}>
+            <p className={'block font-bold mb-2'}>Cond Fee</p>
+            <p>{units?.cond_fee || 'No data'}</p>
+          </div>
+
           <>
             <p className={'block font-bold mb-2'}>Maintenance_requests Unit</p>
             <CardBox

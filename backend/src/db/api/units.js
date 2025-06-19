@@ -17,6 +17,7 @@ module.exports = class UnitsDBApi {
 
         unit_number: data.unit_number || null,
         balance: data.balance || null,
+        unit_factor: data.unit_factor || null,
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -41,6 +42,7 @@ module.exports = class UnitsDBApi {
 
       unit_number: item.unit_number || null,
       balance: item.balance || null,
+      unit_factor: item.unit_factor || null,
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -67,6 +69,9 @@ module.exports = class UnitsDBApi {
       updatePayload.unit_number = data.unit_number;
 
     if (data.balance !== undefined) updatePayload.balance = data.balance;
+
+    if (data.unit_factor !== undefined)
+      updatePayload.unit_factor = data.unit_factor;
 
     updatePayload.updatedById = currentUser.id;
 
@@ -227,6 +232,30 @@ module.exports = class UnitsDBApi {
             ...where,
             balance: {
               ...where.balance,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.unit_factorRange) {
+        const [start, end] = filter.unit_factorRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            unit_factor: {
+              ...where.unit_factor,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            unit_factor: {
+              ...where.unit_factor,
               [Op.lte]: end,
             },
           };

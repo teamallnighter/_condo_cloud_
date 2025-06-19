@@ -67,6 +67,11 @@ const ListUnits = ({
                       <p className={'text-xs   text-gray-500 '}>Balance</p>
                       <p className={'line-clamp-2'}>{item.balance}</p>
                     </div>
+
+                    <div className={'flex-1 px-3'}>
+                      <p className={'text-xs   text-gray-500 '}>Unit Factor</p>
+                      <p className={'line-clamp-2'}>{item.unit_factor}</p>
+                    </div>
                   </Link>
                   <ListActionsPopover
                     onDelete={onDelete}

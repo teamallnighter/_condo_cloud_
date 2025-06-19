@@ -151,6 +151,8 @@ const UsersView = () => {
                       <th>UnitNumber</th>
 
                       <th>Balance</th>
+
+                      <th>Unit Factor</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -166,6 +168,8 @@ const UsersView = () => {
                           <td data-label='unit_number'>{item.unit_number}</td>
 
                           <td data-label='balance'>{item.balance}</td>
+
+                          <td data-label='unit_factor'>{item.unit_factor}</td>
                         </tr>
                       ))}
                   </tbody>

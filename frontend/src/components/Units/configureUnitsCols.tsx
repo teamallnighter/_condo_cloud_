@@ -85,6 +85,20 @@ export const loadColumns = async (
     },
 
     {
+      field: 'unit_factor',
+      headerName: 'Unit Factor',
+      flex: 1,
+      minWidth: 120,
+      filterable: false,
+      headerClassName: 'datagrid--header',
+      cellClassName: 'datagrid--cell',
+
+      editable: hasUpdatePermission,
+
+      type: 'number',
+    },
+
+    {
       field: 'actions',
       type: 'actions',
       minWidth: 30,

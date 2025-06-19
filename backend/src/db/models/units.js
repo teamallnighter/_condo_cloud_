@@ -22,6 +22,10 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.DECIMAL,
       },
 
+      unit_factor: {
+        type: DataTypes.INTEGER,
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,

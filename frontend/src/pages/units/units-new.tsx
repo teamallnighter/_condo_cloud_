@@ -38,6 +38,8 @@ const initialValues = {
   owner: '',
 
   balance: '',
+
+  unit_factor: '',
 };
 
 const UnitsNew = () => {
@@ -83,6 +85,14 @@ const UnitsNew = () => {
 
               <FormField label='Balance'>
                 <Field type='number' name='balance' placeholder='Balance' />
+              </FormField>
+
+              <FormField label='Unit Factor'>
+                <Field
+                  type='number'
+                  name='unit_factor'
+                  placeholder='Unit Factor'
+                />
               </FormField>
 
               <BaseDivider />

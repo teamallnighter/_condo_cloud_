@@ -30,7 +30,7 @@ const UnitsTablesPage = () => {
 
   const [filters] = useState([
     { label: 'UnitNumber', title: 'unit_number' },
-
+    { label: 'Unit Factor', title: 'unit_factor', number: 'true' },
     { label: 'Balance', title: 'balance', number: 'true' },
 
     { label: 'Owner', title: 'owner' },

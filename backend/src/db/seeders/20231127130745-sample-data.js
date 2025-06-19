@@ -85,7 +85,7 @@ const MaintenanceRequestsData = [
 
     description: 'Leaking faucet in kitchen',
 
-    status: 'in_progress',
+    status: 'completed',
 
     request_date: new Date('2023-10-01T10:00:00Z'),
   },
@@ -105,7 +105,7 @@ const MaintenanceRequestsData = [
 
     description: 'Heating not working',
 
-    status: 'in_progress',
+    status: 'pending',
 
     request_date: new Date('2023-09-20T09:00:00Z'),
   },
@@ -115,7 +115,7 @@ const MaintenanceRequestsData = [
 
     description: 'Elevator malfunction',
 
-    status: 'completed',
+    status: 'in_progress',
 
     request_date: new Date('2023-10-02T11:15:00Z'),
   },
@@ -170,6 +170,8 @@ const UnitsData = [
     // type code here for "relation_one" field
 
     balance: 250,
+
+    unit_factor: 3,
   },
 
   {
@@ -178,6 +180,8 @@ const UnitsData = [
     // type code here for "relation_one" field
 
     balance: 0,
+
+    unit_factor: 7,
   },
 
   {
@@ -186,6 +190,8 @@ const UnitsData = [
     // type code here for "relation_one" field
 
     balance: 150,
+
+    unit_factor: 8,
   },
 
   {
@@ -194,6 +200,8 @@ const UnitsData = [
     // type code here for "relation_one" field
 
     balance: 0,
+
+    unit_factor: 6,
   },
 ];
 

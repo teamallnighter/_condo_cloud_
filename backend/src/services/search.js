@@ -54,7 +54,7 @@ module.exports = class SearchService {
       const columnsInt = {
         budgets: ['year', 'total_budget', 'expenses'],
 
-        units: ['balance'],
+        units: ['balance', 'unit_factor'],
       };
 
       let allFoundRecords = [];

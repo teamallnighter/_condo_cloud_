@@ -11,6 +11,8 @@ const Notices = db.notices;
 
 const Units = db.units;
 
+const Owners = db.owners;
+
 const BudgetsData = [
   {
     year: 2023,
@@ -85,7 +87,7 @@ const MaintenanceRequestsData = [
 
     description: 'Leaking faucet in kitchen',
 
-    status: 'pending',
+    status: 'in_progress',
 
     request_date: new Date('2023-10-01T10:00:00Z'),
   },
@@ -105,7 +107,7 @@ const MaintenanceRequestsData = [
 
     description: 'Heating not working',
 
-    status: 'completed',
+    status: 'pending',
 
     request_date: new Date('2023-09-20T09:00:00Z'),
   },
@@ -115,7 +117,7 @@ const MaintenanceRequestsData = [
 
     description: 'Elevator malfunction',
 
-    status: 'completed',
+    status: 'pending',
 
     request_date: new Date('2023-10-02T11:15:00Z'),
   },
@@ -171,11 +173,11 @@ const UnitsData = [
 
     balance: 250,
 
-    unit_factor: 6,
+    unit_factor: 1,
 
-    cond_fee: 58.08,
+    cond_fee: 52.98,
 
-    parking_stall: 6,
+    parking_stall: 7,
   },
 
   {
@@ -185,11 +187,11 @@ const UnitsData = [
 
     balance: 0,
 
-    unit_factor: 4,
+    unit_factor: 1,
 
-    cond_fee: 59.96,
+    cond_fee: 98.25,
 
-    parking_stall: 5,
+    parking_stall: 9,
   },
 
   {
@@ -199,11 +201,11 @@ const UnitsData = [
 
     balance: 150,
 
-    unit_factor: 4,
+    unit_factor: 5,
 
-    cond_fee: 96.18,
+    cond_fee: 59.63,
 
-    parking_stall: 7,
+    parking_stall: 8,
   },
 
   {
@@ -213,13 +215,15 @@ const UnitsData = [
 
     balance: 0,
 
-    unit_factor: 3,
+    unit_factor: 7,
 
-    cond_fee: 34.91,
+    cond_fee: 32.97,
 
-    parking_stall: 6,
+    parking_stall: 4,
   },
 ];
+
+const OwnersData = [{}, {}, {}, {}];
 
 // Similar logic for "relation_many"
 
@@ -377,6 +381,8 @@ module.exports = {
 
     await Units.bulkCreate(UnitsData);
 
+    await Owners.bulkCreate(OwnersData);
+
     await Promise.all([
       // Similar logic for "relation_many"
 
@@ -402,5 +408,7 @@ module.exports = {
     await queryInterface.bulkDelete('notices', null, {});
 
     await queryInterface.bulkDelete('units', null, {});
+
+    await queryInterface.bulkDelete('owners', null, {});
   },
 };

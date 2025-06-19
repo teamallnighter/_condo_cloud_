@@ -12,6 +12,7 @@ import noticesSlice from './notices/noticesSlice';
 import unitsSlice from './units/unitsSlice';
 import rolesSlice from './roles/rolesSlice';
 import permissionsSlice from './permissions/permissionsSlice';
+import ownersSlice from './owners/ownersSlice';
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
     units: unitsSlice,
     roles: rolesSlice,
     permissions: permissionsSlice,
+    owners: ownersSlice,
   },
 });
 

@@ -88,6 +88,14 @@ const menuAside: MenuAsideItem[] = [
     permissions: 'READ_PERMISSIONS',
   },
   {
+    href: '/owners/owners-list',
+    label: 'Owners',
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    icon: icon.mdiTable ?? icon.mdiTable,
+    permissions: 'READ_OWNERS',
+  },
+  {
     href: '/profile',
     label: 'Profile',
     icon: icon.mdiAccountCircle,

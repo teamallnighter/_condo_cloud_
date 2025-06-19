@@ -37,6 +37,7 @@ const Dashboard = () => {
   const [units, setUnits] = React.useState(loadingMessage);
   const [roles, setRoles] = React.useState(loadingMessage);
   const [permissions, setPermissions] = React.useState(loadingMessage);
+  const [owners, setOwners] = React.useState(loadingMessage);
 
   const [widgetsRole, setWidgetsRole] = React.useState({
     role: { value: '', label: '' },
@@ -56,6 +57,7 @@ const Dashboard = () => {
       'units',
       'roles',
       'permissions',
+      'owners',
     ];
     const fns = [
       setUsers,
@@ -66,6 +68,7 @@ const Dashboard = () => {
       setUnits,
       setRoles,
       setPermissions,
+      setOwners,
     ];
 
     const requests = entities.map((entity, index) => {
@@ -449,6 +452,38 @@ const Dashboard = () => {
                       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                       // @ts-ignore
                       path={icon.mdiShieldAccountOutline || icon.mdiTable}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )}
+
+          {hasPermission(currentUser, 'READ_OWNERS') && (
+            <Link href={'/owners/owners-list'}>
+              <div
+                className={`${
+                  corners !== 'rounded-full' ? corners : 'rounded-3xl'
+                } dark:bg-dark-900 ${cardsStyle} dark:border-dark-700 p-6`}
+              >
+                <div className='flex justify-between align-center'>
+                  <div>
+                    <div className='text-lg leading-tight   text-gray-500 dark:text-gray-400'>
+                      Owners
+                    </div>
+                    <div className='text-3xl leading-tight font-semibold'>
+                      {owners}
+                    </div>
+                  </div>
+                  <div>
+                    <BaseIcon
+                      className={`${iconsColor}`}
+                      w='w-16'
+                      h='h-16'
+                      size={48}
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                      // @ts-ignore
+                      path={icon.mdiTable || icon.mdiTable}
                     />
                   </div>
                 </div>

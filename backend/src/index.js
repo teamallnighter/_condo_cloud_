@@ -33,6 +33,8 @@ const rolesRoutes = require('./routes/roles');
 
 const permissionsRoutes = require('./routes/permissions');
 
+const ownersRoutes = require('./routes/owners');
+
 const getBaseUrl = (url) => {
   if (!url) return '';
   return url.endsWith('/api') ? url.slice(0, -4) : url;
@@ -144,6 +146,12 @@ app.use(
   '/api/permissions',
   passport.authenticate('jwt', { session: false }),
   permissionsRoutes,
+);
+
+app.use(
+  '/api/owners',
+  passport.authenticate('jwt', { session: false }),
+  ownersRoutes,
 );
 
 app.use(

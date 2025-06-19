@@ -20,6 +20,8 @@ import _ from 'lodash';
 import dataFormatter from '../../helpers/dataFormatter';
 import { dataGridStyles } from '../../styles';
 
+import CardOwners from './CardOwners';
+
 const perPage = 10;
 
 const TableSampleOwners = ({
@@ -461,7 +463,18 @@ const TableSampleOwners = ({
         <p>Are you sure you want to delete this item?</p>
       </CardBoxModal>
 
-      {dataGrid}
+      {owners && Array.isArray(owners) && !showGrid && (
+        <CardOwners
+          owners={owners}
+          loading={loading}
+          onDelete={handleDeleteModalAction}
+          currentPage={currentPage}
+          numPages={numPages}
+          onPageChange={onPageChange}
+        />
+      )}
+
+      {showGrid && dataGrid}
 
       {selectedRows.length > 0 &&
         createPortal(

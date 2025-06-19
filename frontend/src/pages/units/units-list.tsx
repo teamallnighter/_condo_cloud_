@@ -36,6 +36,8 @@ const UnitsTablesPage = () => {
     { label: 'Cond Fee', title: 'cond_fee', number: 'true' },
 
     { label: 'Owner', title: 'owner' },
+
+    { label: 'Owners', title: 'owners' },
   ]);
 
   const hasCreatePermission =

@@ -47,6 +47,8 @@ const EditUnitsPage = () => {
     cond_fee: '',
 
     parking_stall: '',
+
+    owners: [],
   };
   const [initialValues, setInitialValues] = useState(initVals);
 
@@ -134,6 +136,17 @@ const EditUnitsPage = () => {
                   name='parking_stall'
                   placeholder='Parking Stall'
                 />
+              </FormField>
+
+              <FormField label='Owners' labelFor='owners'>
+                <Field
+                  name='owners'
+                  id='owners'
+                  component={SelectFieldMany}
+                  options={initialValues.owners}
+                  itemRef={'owners'}
+                  showField={'id'}
+                ></Field>
               </FormField>
 
               <BaseDivider />

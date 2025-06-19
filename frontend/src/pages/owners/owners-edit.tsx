@@ -35,7 +35,15 @@ import ImageField from '../../components/ImageField';
 const EditOwnersPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const initVals = {};
+  const initVals = {
+    lives_on_site: false,
+
+    emergency_contact: '',
+
+    mailing_address: '',
+
+    unit: [],
+  };
   const [initialValues, setInitialValues] = useState(initVals);
 
   const { owners } = useAppSelector((state) => state.owners);
@@ -85,6 +93,40 @@ const EditOwnersPage = () => {
             onSubmit={(values) => handleSubmit(values)}
           >
             <Form>
+              <FormField label='Lives On Site' labelFor='lives_on_site'>
+                <Field
+                  name='lives_on_site'
+                  id='lives_on_site'
+                  component={SwitchField}
+                ></Field>
+              </FormField>
+
+              <FormField label='Emergency Contact'>
+                <Field
+                  name='emergency_contact'
+                  placeholder='Emergency Contact'
+                />
+              </FormField>
+
+              <FormField label='Mailing Address' hasTextareaHeight>
+                <Field
+                  name='mailing_address'
+                  id='mailing_address'
+                  component={RichTextField}
+                ></Field>
+              </FormField>
+
+              <FormField label='Unit' labelFor='unit'>
+                <Field
+                  name='unit'
+                  id='unit'
+                  component={SelectFieldMany}
+                  options={initialValues.unit}
+                  itemRef={'units'}
+                  showField={'unit_number'}
+                ></Field>
+              </FormField>
+
               <BaseDivider />
               <BaseButtons>
                 <BaseButton type='submit' color='info' label='Submit' />

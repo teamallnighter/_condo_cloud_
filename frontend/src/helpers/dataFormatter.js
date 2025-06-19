@@ -114,4 +114,23 @@ export default {
     if (!val) return '';
     return { label: val.name, id: val.id };
   },
+
+  ownersManyListFormatter(val) {
+    if (!val || !val.length) return [];
+    return val.map((item) => item.id);
+  },
+  ownersOneListFormatter(val) {
+    if (!val) return '';
+    return val.id;
+  },
+  ownersManyListFormatterEdit(val) {
+    if (!val || !val.length) return [];
+    return val.map((item) => {
+      return { id: item.id, label: item.id };
+    });
+  },
+  ownersOneListFormatterEdit(val) {
+    if (!val) return '';
+    return { label: val.id, id: val.id };
+  },
 };

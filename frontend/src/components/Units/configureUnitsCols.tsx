@@ -127,6 +127,25 @@ export const loadColumns = async (
     },
 
     {
+      field: 'owners',
+      headerName: 'Owners',
+      flex: 1,
+      minWidth: 120,
+      filterable: false,
+      headerClassName: 'datagrid--header',
+      cellClassName: 'datagrid--cell',
+
+      editable: false,
+      sortable: false,
+      type: 'singleSelect',
+      valueFormatter: ({ value }) =>
+        dataFormatter.ownersManyListFormatter(value).join(', '),
+      renderEditCell: (params) => (
+        <DataGridMultiSelect {...params} entityName={'owners'} />
+      ),
+    },
+
+    {
       field: 'actions',
       type: 'actions',
       minWidth: 30,

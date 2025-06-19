@@ -48,6 +48,24 @@ module.exports = function (sequelize, DataTypes) {
   );
 
   units.associate = (db) => {
+    db.units.belongsToMany(db.owners, {
+      as: 'owners',
+      foreignKey: {
+        name: 'units_ownersId',
+      },
+      constraints: false,
+      through: 'unitsOwnersOwners',
+    });
+
+    db.units.belongsToMany(db.owners, {
+      as: 'owners_filter',
+      foreignKey: {
+        name: 'units_ownersId',
+      },
+      constraints: false,
+      through: 'unitsOwnersOwners',
+    });
+
     /// loop through entities and it's fields, and if ref === current e[name] and create relation has many on parent entity
 
     db.units.hasMany(db.users, {

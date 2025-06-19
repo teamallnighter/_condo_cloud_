@@ -32,7 +32,15 @@ import { useAppDispatch } from '../../stores/hooks';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 
-const initialValues = {};
+const initialValues = {
+  lives_on_site: false,
+
+  emergency_contact: '',
+
+  mailing_address: '',
+
+  unit: [],
+};
 
 const OwnersNew = () => {
   const router = useRouter();
@@ -61,6 +69,39 @@ const OwnersNew = () => {
             onSubmit={(values) => handleSubmit(values)}
           >
             <Form>
+              <FormField label='Lives On Site' labelFor='lives_on_site'>
+                <Field
+                  name='lives_on_site'
+                  id='lives_on_site'
+                  component={SwitchField}
+                ></Field>
+              </FormField>
+
+              <FormField label='Emergency Contact'>
+                <Field
+                  name='emergency_contact'
+                  placeholder='Emergency Contact'
+                />
+              </FormField>
+
+              <FormField label='Mailing Address' hasTextareaHeight>
+                <Field
+                  name='mailing_address'
+                  id='mailing_address'
+                  component={RichTextField}
+                ></Field>
+              </FormField>
+
+              <FormField label='Unit' labelFor='unit'>
+                <Field
+                  name='unit'
+                  id='unit'
+                  itemRef={'units'}
+                  options={[]}
+                  component={SelectFieldMany}
+                ></Field>
+              </FormField>
+
               <BaseDivider />
               <BaseButtons>
                 <BaseButton type='submit' color='info' label='Submit' />

@@ -31,6 +31,10 @@ module.exports = class UnitsDBApi {
       transaction,
     });
 
+    await units.setOwners(data.owners || [], {
+      transaction,
+    });
+
     return units;
   }
 
@@ -92,6 +96,10 @@ module.exports = class UnitsDBApi {
 
         { transaction },
       );
+    }
+
+    if (data.owners !== undefined) {
+      await units.setOwners(data.owners, { transaction });
     }
 
     return units;
@@ -169,6 +177,10 @@ module.exports = class UnitsDBApi {
       transaction,
     });
 
+    output.owners = await units.getOwners({
+      transaction,
+    });
+
     return output;
   }
 
@@ -209,6 +221,12 @@ module.exports = class UnitsDBApi {
               ],
             }
           : {},
+      },
+
+      {
+        model: db.owners,
+        as: 'owners',
+        required: false,
       },
     ];
 
@@ -328,6 +346,38 @@ module.exports = class UnitsDBApi {
           ...where,
           active: filter.active === true || filter.active === 'true',
         };
+      }
+
+      if (filter.owners) {
+        const searchTerms = filter.owners.split('|');
+
+        include = [
+          {
+            model: db.owners,
+            as: 'owners_filter',
+            required: searchTerms.length > 0,
+            where:
+              searchTerms.length > 0
+                ? {
+                    [Op.or]: [
+                      {
+                        id: {
+                          [Op.in]: searchTerms.map((term) => Utils.uuid(term)),
+                        },
+                      },
+                      {
+                        id: {
+                          [Op.or]: searchTerms.map((term) => ({
+                            [Op.iLike]: `%${term}%`,
+                          })),
+                        },
+                      },
+                    ],
+                  }
+                : undefined,
+          },
+          ...include,
+        ];
       }
 
       if (filter.createdAtRange) {

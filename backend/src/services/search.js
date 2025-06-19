@@ -50,6 +50,8 @@ module.exports = class SearchService {
         notices: ['title', 'content'],
 
         units: ['unit_number'],
+
+        owners: ['emergency_contact', 'mailing_address'],
       };
       const columnsInt = {
         budgets: ['year', 'total_budget', 'expenses'],

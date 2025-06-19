@@ -39,6 +39,83 @@ export const loadColumns = async (
 
   return [
     {
+      field: 'user_account',
+      headerName: 'User Account',
+      flex: 1,
+      minWidth: 120,
+      filterable: false,
+      headerClassName: 'datagrid--header',
+      cellClassName: 'datagrid--cell',
+
+      editable: hasUpdatePermission,
+
+      sortable: false,
+      type: 'singleSelect',
+      getOptionValue: (value: any) => value?.id,
+      getOptionLabel: (value: any) => value?.label,
+      valueOptions: await callOptionsApi('users'),
+      valueGetter: (params: GridValueGetterParams) =>
+        params?.value?.id ?? params?.value,
+    },
+
+    {
+      field: 'lives_on_site',
+      headerName: 'Lives On Site',
+      flex: 1,
+      minWidth: 120,
+      filterable: false,
+      headerClassName: 'datagrid--header',
+      cellClassName: 'datagrid--cell',
+
+      editable: hasUpdatePermission,
+
+      type: 'boolean',
+    },
+
+    {
+      field: 'emergency_contact',
+      headerName: 'Emergency Contact',
+      flex: 1,
+      minWidth: 120,
+      filterable: false,
+      headerClassName: 'datagrid--header',
+      cellClassName: 'datagrid--cell',
+
+      editable: hasUpdatePermission,
+    },
+
+    {
+      field: 'mailing_address',
+      headerName: 'Mailing Address',
+      flex: 1,
+      minWidth: 120,
+      filterable: false,
+      headerClassName: 'datagrid--header',
+      cellClassName: 'datagrid--cell',
+
+      editable: hasUpdatePermission,
+    },
+
+    {
+      field: 'unit',
+      headerName: 'Unit',
+      flex: 1,
+      minWidth: 120,
+      filterable: false,
+      headerClassName: 'datagrid--header',
+      cellClassName: 'datagrid--cell',
+
+      editable: false,
+      sortable: false,
+      type: 'singleSelect',
+      valueFormatter: ({ value }) =>
+        dataFormatter.unitsManyListFormatter(value).join(', '),
+      renderEditCell: (params) => (
+        <DataGridMultiSelect {...params} entityName={'units'} />
+      ),
+    },
+
+    {
       field: 'actions',
       type: 'actions',
       minWidth: 30,

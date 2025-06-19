@@ -20,6 +20,13 @@ router.use(checkCrudPermissions('owners'));
  *        type: object
  *        properties:
 
+ *          emergency_contact:
+ *            type: string
+ *            default: emergency_contact
+ *          mailing_address:
+ *            type: string
+ *            default: mailing_address
+
  */
 
 /**
@@ -295,7 +302,7 @@ router.get(
     const currentUser = req.currentUser;
     const payload = await OwnersDBApi.findAll(req.query, { currentUser });
     if (filetype && filetype === 'csv') {
-      const fields = ['id'];
+      const fields = ['id', 'emergency_contact', 'mailing_address'];
       const opts = { fields };
       try {
         const csv = parse(payload.rows, opts);

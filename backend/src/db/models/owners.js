@@ -14,6 +14,21 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
       },
 
+      lives_on_site: {
+        type: DataTypes.BOOLEAN,
+
+        allowNull: false,
+        defaultValue: false,
+      },
+
+      emergency_contact: {
+        type: DataTypes.TEXT,
+      },
+
+      mailing_address: {
+        type: DataTypes.TEXT,
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,
@@ -28,9 +43,35 @@ module.exports = function (sequelize, DataTypes) {
   );
 
   owners.associate = (db) => {
+    db.owners.belongsToMany(db.units, {
+      as: 'unit',
+      foreignKey: {
+        name: 'owners_unitId',
+      },
+      constraints: false,
+      through: 'ownersUnitUnits',
+    });
+
+    db.owners.belongsToMany(db.units, {
+      as: 'unit_filter',
+      foreignKey: {
+        name: 'owners_unitId',
+      },
+      constraints: false,
+      through: 'ownersUnitUnits',
+    });
+
     /// loop through entities and it's fields, and if ref === current e[name] and create relation has many on parent entity
 
     //end loop
+
+    db.owners.belongsTo(db.users, {
+      as: 'user_account',
+      foreignKey: {
+        name: 'user_accountId',
+      },
+      constraints: false,
+    });
 
     db.owners.belongsTo(db.users, {
       as: 'createdBy',

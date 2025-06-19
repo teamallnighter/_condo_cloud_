@@ -15,12 +15,24 @@ module.exports = class OwnersDBApi {
       {
         id: data.id || undefined,
 
+        lives_on_site: data.lives_on_site || false,
+
+        emergency_contact: data.emergency_contact || null,
+        mailing_address: data.mailing_address || null,
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
       },
       { transaction },
     );
+
+    await owners.setUser_account(data.user_account || null, {
+      transaction,
+    });
+
+    await owners.setUnit(data.unit || [], {
+      transaction,
+    });
 
     return owners;
   }
@@ -33,6 +45,10 @@ module.exports = class OwnersDBApi {
     const ownersData = data.map((item, index) => ({
       id: item.id || undefined,
 
+      lives_on_site: item.lives_on_site || false,
+
+      emergency_contact: item.emergency_contact || null,
+      mailing_address: item.mailing_address || null,
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -55,9 +71,30 @@ module.exports = class OwnersDBApi {
 
     const updatePayload = {};
 
+    if (data.lives_on_site !== undefined)
+      updatePayload.lives_on_site = data.lives_on_site;
+
+    if (data.emergency_contact !== undefined)
+      updatePayload.emergency_contact = data.emergency_contact;
+
+    if (data.mailing_address !== undefined)
+      updatePayload.mailing_address = data.mailing_address;
+
     updatePayload.updatedById = currentUser.id;
 
     await owners.update(updatePayload, { transaction });
+
+    if (data.user_account !== undefined) {
+      await owners.setUser_account(
+        data.user_account,
+
+        { transaction },
+      );
+    }
+
+    if (data.unit !== undefined) {
+      await owners.setUnit(data.unit, { transaction });
+    }
 
     return owners;
   }
@@ -120,6 +157,14 @@ module.exports = class OwnersDBApi {
 
     const output = owners.get({ plain: true });
 
+    output.user_account = await owners.getUser_account({
+      transaction,
+    });
+
+    output.unit = await owners.getUnit({
+      transaction,
+    });
+
     return output;
   }
 
@@ -135,7 +180,39 @@ module.exports = class OwnersDBApi {
 
     const transaction = (options && options.transaction) || undefined;
 
-    let include = [];
+    let include = [
+      {
+        model: db.users,
+        as: 'user_account',
+
+        where: filter.user_account
+          ? {
+              [Op.or]: [
+                {
+                  id: {
+                    [Op.in]: filter.user_account
+                      .split('|')
+                      .map((term) => Utils.uuid(term)),
+                  },
+                },
+                {
+                  firstName: {
+                    [Op.or]: filter.user_account
+                      .split('|')
+                      .map((term) => ({ [Op.iLike]: `%${term}%` })),
+                  },
+                },
+              ],
+            }
+          : {},
+      },
+
+      {
+        model: db.units,
+        as: 'unit',
+        required: false,
+      },
+    ];
 
     if (filter) {
       if (filter.id) {
@@ -145,11 +222,72 @@ module.exports = class OwnersDBApi {
         };
       }
 
+      if (filter.emergency_contact) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike(
+            'owners',
+            'emergency_contact',
+            filter.emergency_contact,
+          ),
+        };
+      }
+
+      if (filter.mailing_address) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike(
+            'owners',
+            'mailing_address',
+            filter.mailing_address,
+          ),
+        };
+      }
+
       if (filter.active !== undefined) {
         where = {
           ...where,
           active: filter.active === true || filter.active === 'true',
         };
+      }
+
+      if (filter.lives_on_site) {
+        where = {
+          ...where,
+          lives_on_site: filter.lives_on_site,
+        };
+      }
+
+      if (filter.unit) {
+        const searchTerms = filter.unit.split('|');
+
+        include = [
+          {
+            model: db.units,
+            as: 'unit_filter',
+            required: searchTerms.length > 0,
+            where:
+              searchTerms.length > 0
+                ? {
+                    [Op.or]: [
+                      {
+                        id: {
+                          [Op.in]: searchTerms.map((term) => Utils.uuid(term)),
+                        },
+                      },
+                      {
+                        unit_number: {
+                          [Op.or]: searchTerms.map((term) => ({
+                            [Op.iLike]: `%${term}%`,
+                          })),
+                        },
+                      },
+                    ],
+                  }
+                : undefined,
+          },
+          ...include,
+        ];
       }
 
       if (filter.createdAtRange) {

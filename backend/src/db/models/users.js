@@ -110,6 +110,14 @@ module.exports = function (sequelize, DataTypes) {
       constraints: false,
     });
 
+    db.users.hasMany(db.owners, {
+      as: 'owners_user_account',
+      foreignKey: {
+        name: 'user_accountId',
+      },
+      constraints: false,
+    });
+
     //end loop
 
     db.users.belongsTo(db.roles, {

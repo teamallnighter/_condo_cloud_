@@ -54,6 +54,81 @@ const OwnersView = () => {
           />
         </SectionTitleLineWithButton>
         <CardBox>
+          <FormField label='Lives On Site'>
+            <SwitchField
+              field={{ name: 'lives_on_site', value: owners?.lives_on_site }}
+              form={{ setFieldValue: () => null }}
+              disabled
+            />
+          </FormField>
+
+          <div className={'mb-4'}>
+            <p className={'block font-bold mb-2'}>Emergency Contact</p>
+            <p>{owners?.emergency_contact}</p>
+          </div>
+
+          <div className={'mb-4'}>
+            <p className={'block font-bold mb-2'}>Mailing Address</p>
+            {owners.mailing_address ? (
+              <p dangerouslySetInnerHTML={{ __html: owners.mailing_address }} />
+            ) : (
+              <p>No data</p>
+            )}
+          </div>
+
+          <>
+            <p className={'block font-bold mb-2'}>Unit</p>
+            <CardBox
+              className='mb-6 border border-gray-300 rounded overflow-hidden'
+              hasTable
+            >
+              <div className='overflow-x-auto'>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>UnitNumber</th>
+
+                      <th>Balance</th>
+
+                      <th>Unit Factor</th>
+
+                      <th>Cond Fee</th>
+
+                      <th>Parking Stall</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {owners.unit &&
+                      Array.isArray(owners.unit) &&
+                      owners.unit.map((item: any) => (
+                        <tr
+                          key={item.id}
+                          onClick={() =>
+                            router.push(`/units/units-view/?id=${item.id}`)
+                          }
+                        >
+                          <td data-label='unit_number'>{item.unit_number}</td>
+
+                          <td data-label='balance'>{item.balance}</td>
+
+                          <td data-label='unit_factor'>{item.unit_factor}</td>
+
+                          <td data-label='cond_fee'>{item.cond_fee}</td>
+
+                          <td data-label='parking_stall'>
+                            {item.parking_stall}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+              {!owners?.unit?.length && (
+                <div className={'text-center py-4'}>No data</div>
+              )}
+            </CardBox>
+          </>
+
           <BaseDivider />
 
           <BaseButton

@@ -84,6 +84,15 @@ const ListUnits = ({
                       </p>
                       <p className={'line-clamp-2'}>{item.parking_stall}</p>
                     </div>
+
+                    <div className={'flex-1 px-3'}>
+                      <p className={'text-xs   text-gray-500 '}>Owners</p>
+                      <p className={'line-clamp-2'}>
+                        {dataFormatter
+                          .ownersManyListFormatter(item.owners)
+                          .join(', ')}
+                      </p>
+                    </div>
                   </Link>
                   <ListActionsPopover
                     onDelete={onDelete}

@@ -28,7 +28,14 @@ const OwnersTablesPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const [filters] = useState([]);
+  const [filters] = useState([
+    { label: 'Emergency Contact', title: 'emergency_contact' },
+    { label: 'Mailing Address', title: 'mailing_address' },
+
+    { label: 'User Account', title: 'user_account' },
+
+    { label: 'Unit', title: 'unit' },
+  ]);
 
   const hasCreatePermission =
     currentUser && hasPermission(currentUser, 'CREATE_OWNERS');
@@ -120,6 +127,10 @@ const OwnersTablesPage = () => {
 
           <div className='md:inline-flex items-center ms-auto'>
             <div id='delete-rows-button'></div>
+
+            <Link href={'/owners/owners-list'}>
+              Back to <span className='capitalize'>card</span>
+            </Link>
           </div>
         </CardBox>
         <CardBox className='mb-6' hasTable>

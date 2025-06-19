@@ -44,6 +44,8 @@ const initialValues = {
   cond_fee: '',
 
   parking_stall: '',
+
+  owners: [],
 };
 
 const UnitsNew = () => {
@@ -109,6 +111,16 @@ const UnitsNew = () => {
                   name='parking_stall'
                   placeholder='Parking Stall'
                 />
+              </FormField>
+
+              <FormField label='Owners' labelFor='owners'>
+                <Field
+                  name='owners'
+                  id='owners'
+                  itemRef={'owners'}
+                  options={[]}
+                  component={SelectFieldMany}
+                ></Field>
               </FormField>
 
               <BaseDivider />

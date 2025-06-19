@@ -50,7 +50,46 @@ const ListOwners = ({
                     className={
                       'flex-1 px-4 py-6 h-24 flex divide-x-2  divide-stone-300   items-center overflow-hidden`}> dark:divide-dark-700 overflow-x-auto'
                     }
-                  ></Link>
+                  >
+                    <div className={'flex-1 px-3'}>
+                      <p className={'text-xs   text-gray-500 '}>User Account</p>
+                      <p className={'line-clamp-2'}>
+                        {dataFormatter.usersOneListFormatter(item.user_account)}
+                      </p>
+                    </div>
+
+                    <div className={'flex-1 px-3'}>
+                      <p className={'text-xs   text-gray-500 '}>
+                        Lives On Site
+                      </p>
+                      <p className={'line-clamp-2'}>
+                        {dataFormatter.booleanFormatter(item.lives_on_site)}
+                      </p>
+                    </div>
+
+                    <div className={'flex-1 px-3'}>
+                      <p className={'text-xs   text-gray-500 '}>
+                        Emergency Contact
+                      </p>
+                      <p className={'line-clamp-2'}>{item.emergency_contact}</p>
+                    </div>
+
+                    <div className={'flex-1 px-3'}>
+                      <p className={'text-xs   text-gray-500 '}>
+                        Mailing Address
+                      </p>
+                      <p className={'line-clamp-2'}>{item.mailing_address}</p>
+                    </div>
+
+                    <div className={'flex-1 px-3'}>
+                      <p className={'text-xs   text-gray-500 '}>Unit</p>
+                      <p className={'line-clamp-2'}>
+                        {dataFormatter
+                          .unitsManyListFormatter(item.unit)
+                          .join(', ')}
+                      </p>
+                    </div>
+                  </Link>
                   <ListActionsPopover
                     onDelete={onDelete}
                     itemId={item.id}

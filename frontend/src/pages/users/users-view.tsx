@@ -197,6 +197,49 @@ const UsersView = () => {
             </CardBox>
           </>
 
+          <>
+            <p className={'block font-bold mb-2'}>Owners User Account</p>
+            <CardBox
+              className='mb-6 border border-gray-300 rounded overflow-hidden'
+              hasTable
+            >
+              <div className='overflow-x-auto'>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Lives On Site</th>
+
+                      <th>Emergency Contact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.owners_user_account &&
+                      Array.isArray(users.owners_user_account) &&
+                      users.owners_user_account.map((item: any) => (
+                        <tr
+                          key={item.id}
+                          onClick={() =>
+                            router.push(`/owners/owners-view/?id=${item.id}`)
+                          }
+                        >
+                          <td data-label='lives_on_site'>
+                            {dataFormatter.booleanFormatter(item.lives_on_site)}
+                          </td>
+
+                          <td data-label='emergency_contact'>
+                            {item.emergency_contact}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+              {!users?.owners_user_account?.length && (
+                <div className={'text-center py-4'}>No data</div>
+              )}
+            </CardBox>
+          </>
+
           <BaseDivider />
 
           <BaseButton
